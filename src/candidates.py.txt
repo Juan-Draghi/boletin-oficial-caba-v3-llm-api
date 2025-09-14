@@ -1,0 +1,88 @@
+import re
+from pathlib import Path
+import pandas as pd
+
+from .config import DATA_PROCESSED, CONTEXT_WINDOW
+from .io_pdf import extract_text_from_pdf
+from .preprocess import normalize_text, extract_context
+from .rules import KEYWORDS, ACTION_VERBS
+
+
+def _iter_matches(text: str, pattern: str, is_regex: bool):
+    """
+    Itera coincidencias en 'text'.
+    - Si is_regex=True: usa el patrón tal cual.
+    - Si is_regex=False: trata 'pattern' como literal y aplica \b...\b.
+    """
+    if is_regex:
+        compiled = re.compile(pattern, flags=re.IGNORECASE)
+    else:
+        # patrón literal con límites de palabra
+        compiled = re.compile(rf"\b{re.escape(pattern)}\b", flags=re.IGNORECASE)
+    for m in compiled.finditer(text):
+        yield m
+
+
+def _normalize_spec(spec: str):
+    """
+    Devuelve (pattern, is_regex) según el prefijo 'regex:'.
+    """
+    if spec.startswith("regex:"):
+        return spec[len("regex:"):], True
+    return spec, False
+
+
+def find_keyword_spans(text: str, patterns: list[str]):
+    """
+    Devuelve tuplas (pattern_original, span) para cada keyword encontrada.
+    """
+    for pat in patterns:
+        patt, is_rx = _normalize_spec(pat)
+        for m in _iter_matches(text, patt, is_rx):
+            yield pat, (m.start(), m.end())
+
+
+def context_has_action_verbs(context: str, verbs: list[str]) -> bool:
+    """
+    Devuelve True si el contexto contiene al menos un verbo/expresión de acción.
+    Permite literales y regex con la misma convención 'regex:'.
+    """
+    for v in verbs:
+        patt, is_rx = _normalize_spec(v)
+        if any(True for _ in _iter_matches(context, patt, is_rx)):
+            return True
+    return False
+
+
+def generate_candidates_from_pdf(pdf_path: Path) -> pd.DataFrame:
+    raw = extract_text_from_pdf(pdf_path)
+    norm = normalize_text(raw)
+
+    rows = []
+    for kw, span in find_keyword_spans(norm, KEYWORDS):
+        ctx = extract_context(norm, span, CONTEXT_WINDOW)
+        has_action = context_has_action_verbs(ctx, ACTION_VERBS)
+        rows.append({
+            "pdf": pdf_path.name,
+            "keyword": kw,          # conserva tal cual aparece en rules.py (incluyendo 'regex:' si lo tuviera)
+            "start": span[0],
+            "end": span[1],
+            "context": ctx,
+            "has_action": int(has_action),
+        })
+    return pd.DataFrame(rows)
+
+
+def export_candidates(df: pd.DataFrame, out_path: Path):
+    out_path.parent.mkdir(parents=True, exist_ok=True)
+    df.to_csv(out_path, index=False)
+
+
+def run_batch(input_dir: Path, out_csv: Path):
+    all_rows = []
+    for pdf in input_dir.glob("*.pdf"):
+        df = generate_candidates_from_pdf(pdf)
+        if not df.empty:
+            all_rows.append(df)
+    full = pd.concat(all_rows, ignore_index=True) if all_rows else pd.DataFrame()
+    export_candidates(full, out_csv)
