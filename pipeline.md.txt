@@ -1,0 +1,51 @@
+## 📊 Pipeline de extracción de normativa
+
+El sistema sigue una serie de pasos encadenados (pipeline) para identificar fragmentos normativos en el Boletín Oficial:
+
+
+
+┌───────────────┐
+│   PDF Boletín      │   ← (archivo en data/raw/)
+└───────┬───────┘
+        │
+        ▼
+┌────────────────────┐
+│ 1. Leer texto PDF        │   (io_pdf.py con pdfplumber)
+└───────┬────────────┘
+        │
+        ▼
+┌────────────────────────────┐
+│ 2. Normalizar el texto              │   (preprocess.py: tildes, espacios)
+└───────┬────────────────────┘
+        │
+        ▼
+┌────────────────────────────┐
+│ 3. Buscar palabras clave            │   (rules.py + regex)
+└───────┬────────────────────┘
+        │
+        ▼
+┌────────────────────────────┐
+│ 4. Extraer contexto ±200            │   (preprocess.py)
+└───────┬────────────────────┘
+        │
+        ▼
+┌────────────────────────────┐
+│ 5. Verificar verbos acción         │   (candidates.py con ACTION_VERBS)
+└───────┬────────────────────┘
+        │
+        ▼
+┌────────────────────────────┐
+│ 6. Exportar a CSV                  |   (candidatos.csv en data/processed/)
+└────────────────────────────┘
+
+
+📄 **Salida esperada:**  
+El archivo `candidatos.csv` contiene, para cada coincidencia:  
+
+- `pdf` → nombre del boletín analizado  
+- `keyword` → palabra clave detectada  
+- `start`, `end` → posición en el texto  
+- `context` → fragmento de ±200 palabras alrededor  
+- `has_action` → 1 si contiene verbo de acción normativa, 0 si no
+
+
