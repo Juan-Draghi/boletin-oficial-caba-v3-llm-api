@@ -1,5 +1,5 @@
 # Palabras clave relevantes
-keywords = [
+KEYWORDS = [
     "Código Urbanístico",
     "Código de Edificación",
     "Código de Habilitaciones",
