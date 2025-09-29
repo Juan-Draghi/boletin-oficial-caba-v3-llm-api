@@ -60,15 +60,95 @@ KEYWORDS = [
 
 
 # Verbos de acción normativa
+
 ACTION_VERBS = [
-    r"\b[Mm]odifica\b", r"\b[Mm]odifícase\b", r"\b[Mm]odificar\b",
-    r"\b[Dd]eroga\b", r"\b[Dd]erogar\b", r"\b[Dd]erógase\b",
-    r"\b[Aa]prueba\b", r"\b[Aa]probar\b", r"\b[Aa]pruébese\b",
-    r"\b[Dd]eja sin efecto\b", r"\b[Dd]ejar sin efecto\b", r"\b[Dd]éjase sin efecto\b",
-    r"\b[Ss]ustituye\b", r"\b[Ss]ustituir\b", r"\b[Ss]ustitúyese\b",
-    r"\b[Ee]stablece\b", r"\b[Ee]stablecer\b", r"\b[Ee]stablécese\b",
-    r"\b[Ff]ija\b", r"\b[Ff]ijar\b", r"\b[Ff]íjese\b",
-    r"\b[Dd]etermina\b", r"\b[Dd]etermínase\b", r"\b[Dd]eterminar\b",
-    r"\b[Rr]eglamenta\b", r"\b[Rr]eglaméntese\b", r"\b[Rr]eglamentación\b",
-    r"\b[Pp]rorroga\b", r"\b[Pp]rorrógase\b", r"\b[Pp]rorrogar\b"
+    # Modificar
+    r"regex:\bmodifica\b",
+    r"regex:\bmodificar\b",
+    r"regex:\bmodificase\b",
+    r"regex:\bmodifiquese\b",
+
+    # Derogar
+    r"regex:\bderoga\b",
+    r"regex:\bderogar\b",
+    r"regex:\bderogase\b",
+    r"regex:\bderoguese\b",
+
+    # Aprobar (ambas formulas)
+    r"regex:\baprueba\b",
+    r"regex:\baprobar\b",
+    r"regex:\bapruebese\b",
+    r"regex:\bapruebase\b",
+
+    # Dejar sin efecto (multi-palabra)
+    r"regex:\bdeja sin efecto\b",
+    r"regex:\bdejar sin efecto\b",
+    r"regex:\bdejase sin efecto\b",
+    r"regex:\bdejese sin efecto\b",
+
+    # Sustituir
+    r"regex:\bsustituye\b",
+    r"regex:\bsustituir\b",
+    r"regex:\bsustituyase\b",
+    r"regex:\bsustituyese\b",
+
+    # Establecer
+    r"regex:\bestablece\b",
+    r"regex:\bestablecer\b",
+    r"regex:\bestablezcase\b",   # establezcase (forma imperativa oficial)
+    r"regex:\bestablecese\b",
+
+    # Fijar
+    r"regex:\bfija\b",
+    r"regex:\bfijar\b",
+    r"regex:\bfijese\b",
+    r"regex:\bfijase\b",
+
+    # Determinar
+    r"regex:\bdetermina\b",
+    r"regex:\bdeterminar\b",
+    r"regex:\bdeterminese\b",
+    r"regex:\bdeterminase\b",
+
+    # Reglamentar
+    r"regex:\breglamenta\b",
+    r"regex:\breglamentar\b",
+    r"regex:\breglamentese\b",
+    r"regex:\breglamentase\b",
+    r"regex:\breglamentacion\b",
+
+    # Prorrogar
+    r"regex:\bprorroga\b",
+    r"regex:\bprorrogar\b",
+    r"regex:\bprorrogase\b",
+    r"regex:\bprorrogese\b",
+
+    # Incorporar / Crear
+    r"regex:\bincorpora\b",
+    r"regex:\bincorporar\b",
+    r"regex:\bincorporase\b",
+    r"regex:\bincorpor ese\b",   # por si hubiese error tipográfico con espacio
+    r"regex:\bincorpor ese\b",
+    r"regex:\bincorpor ese\b",
+    r"regex:\bincorpor ese\b",   # puedes eliminar estas si no las necesitas
+    r"regex:\bcrea\b",
+    r"regex:\bcrear\b",
+    r"regex:\bcrease\b",
+    r"regex:\bcreese\b",
+
+    # Declarar / Otorgar / Rectificar
+    r"regex:\bdeclara\b",
+    r"regex:\bdeclarar\b",
+    r"regex:\bdeclarese\b",
+    r"regex:\bdeclarase\b",
+
+    r"regex:\botorga\b",
+    r"regex:\botorgar\b",
+    r"regex:\botorguese\b",
+    r"regex:\botorgase\b",
+
+    r"regex:\brectifica\b",
+    r"regex:\brectificar\b",
+    r"regex:\brectifiquese\b",
+    r"regex:\brectificase\b",
 ]
