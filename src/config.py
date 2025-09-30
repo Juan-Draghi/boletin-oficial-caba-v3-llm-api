@@ -10,5 +10,5 @@ MODELS_DIR = ROOT / "models"
 REPORTS_DIR = ROOT / "reports"
 
 # Parámetros globales
-CONTEXT_WINDOW = 400  # ± palabras alrededor del match
+CONTEXT_WINDOW = 200  # ± palabras alrededor del match
 RANDOM_STATE = 42
