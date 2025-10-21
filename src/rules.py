@@ -23,6 +23,7 @@ KEYWORDS = [
     "planos de mensura",
     "obras en contravención",
     "UERESGP",
+    "accesibilidad",
     r"[Dd]isposici[oó]n(?: [Nn]°?)? ?3\.?500(?:[-/]?GCABA)?[-/]?DGOEP[-/]?16",
     r"[Dd]isposici[oó]n(?: [Nn]°?)? ?331(?:[-/]?GCABA)?[-/]?DGDCIV[-/]?25",
     r"[Dd]isposici[oó]n(?: [Nn]°?)? ?89(?:[-/]?GCABA)?[-/]?DGROC[-/]?24",
