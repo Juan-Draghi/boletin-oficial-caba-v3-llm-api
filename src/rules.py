@@ -21,9 +21,14 @@ KEYWORDS = [
     "Código Fiscal",
     "Área Céntrica",
     "planos de mensura",
+    "planos de obra",
+    "planos de instalaciones",
     "obras en contravención",
     "UERESGP",
     "accesibilidad",
+    "digesto",
+    "reurbanización",
+    "uso del espacio público",
     r"[Dd]isposici[oó]n(?: [Nn]°?)? ?3\.?500(?:[-/]?GCABA)?[-/]?DGOEP[-/]?16",
     r"[Dd]isposici[oó]n(?: [Nn]°?)? ?331(?:[-/]?GCABA)?[-/]?DGDCIV[-/]?25",
     r"[Dd]isposici[oó]n(?: [Nn]°?)? ?89(?:[-/]?GCABA)?[-/]?DGROC[-/]?24",
@@ -68,6 +73,7 @@ ACTION_VERBS = [
     r"regex:\bmodificar\b",
     r"regex:\bmodificase\b",
     r"regex:\bmodifiquese\b",
+    r"regex:\bmodificaciones\b",
 
     # Derogar
     r"regex:\bderoga\b",
