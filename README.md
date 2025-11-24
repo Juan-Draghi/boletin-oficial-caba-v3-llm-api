@@ -33,7 +33,3 @@ Se permite su uso, copia, modificación y redistribución con o sin fines comerc
 
 ## Autor:
 Juan Draghi — Biblioteca del Consejo Profesional de Arquitectura y Urbanismo (con la asistencia de ChatGPT)
-
-
-Este proyecto se distribuye bajo la licencia MIT. Puede ser reutilizado, adaptado o modificado libremente, citando al autor original.
-
